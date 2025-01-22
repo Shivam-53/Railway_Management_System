@@ -26,26 +26,31 @@ Once all the steps are completed, start the server with `node index.js`
 Create an admin via,
 `http://localhost:3000/admin/register`
 The Payload will be
-`{
+```json
+{
     "name":"xyz",
     "phoneNumber":"123456789",
     "email":"xyz@gmail.com",
     "password":"xyz",
     "role":"admin"
-}`
+}
+```
 
 Login as an admin via,
 `http://localhost:3000/admin/login`
 The Payload is,
-`{
-  "phoneNumber":`phoneNumber used for registration`,
-  "password":`password used for registratio`
+```json
+{
+  "phoneNumber":"123456789",
+  "password":"xyz"
 }
-`
+
+```
 To schedule a train,
 `http://localhost:3000/admin/scheduleTrain`,
 The Example Payload is,
-`
+```json
+
 {
     "TrainName": "Mahanagri",
     "Origin": "Mumbai",
@@ -55,58 +60,65 @@ The Example Payload is,
     "SeatAvailable": 100,
     "SeatBooked": 0
 }
-`
 
-
+```
 
 ###  Now, the User's Functionallity
 
  Register the user via,
 `http://localhost:3000/user/register`
 Example Payload:
-`{
+```json
+{
             "Name": "xyz",
             "phoneNumber": "123546789",
             "email": "xyz@email.com",
             "password": "****"
 }
-`
+
+```
 
 User login,
 `http://localhost:3000/user/login`
 Example Payload:
-`{
+```json
+{
     "name":"xyz",
     "phoneNumber":"123456789",
     "password":"****"
-}`
+}
+```
 Now, a JWT token will be returned, using this JWT token the server can identify the user who's requesting.
 
 The user can check if there's any seat available between two places using,
 `http://localhost:3000/user/trainseat`,
 payload: 
-`{
+```json
+{
   "origin":"Mumbai",
   "destination":"lucknow",
   "phoneNumber":"123546"
-}`
+}
+```
 ### * Make sure to add JWT token in Authorization header
 
 
 The User can book a seat in the train via,
 `http://localhost:3000/user/bookseat`
 payload is,
-`{
+```json
+{
   "origin": "Mumbai",
   "userName":"xyz",
   "destination": "lucknow",
   "seatToBeBooked": 7,
   "trainName": "Mahanagri"
-}`
-       
+}
+```    
 This will return a booking reference id, through which one can easily check their booking.
 Url to check booked status,
-`http://localhost:3000/getbookingDetails?id?Username'
+
+`http://localhost:3000/getbookingDetails?id?Username`
 The uri consits of two query parameters, id indicates the booking id and Username is the Username which booked the seat.
 
 
