@@ -167,6 +167,7 @@ const bookSeat = async (req, res) => {
                     DepartureTime: seatCheck.DepartureTime,
                     ArrivalTime: seatCheck.ArrivalTime,
                     SeatBooked: seatToBeBooked,
+                    isActive:true
                 },
                 { transaction }
             );
@@ -222,4 +223,24 @@ const getSpecificBookingDetails = async (req, res) => {
         res.send(error);
     }
 }
-module.exports = { registerUser, loginUser, getSeatAvailability, bookSeat, getSpecificBookingDetails };
+
+
+const cancelBooking=async(req,res)=>{
+    try {
+        const refId=req.params.id;
+        console.log(refId);
+        console.log("yess");
+        const findData=await bookedModel.update(
+            {isActive:false},
+            {
+            where:{
+                BookingID:refId
+            }
+        })
+        console.log(findData);
+    } catch (error) {
+        res.send(error)
+    }
+
+}
+module.exports = { registerUser, loginUser, getSeatAvailability, bookSeat, getSpecificBookingDetails,cancelBooking };

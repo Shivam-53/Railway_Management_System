@@ -1,12 +1,14 @@
 const jwt=require("jsonwebtoken")
+const dotenv=require('dotenv');
+dotenv.config();
 let secretkey;
 
 const tokenGeneration = async (phoneNumber,role) => {
     try {
         if(role=="admin"){
-            secretkey="admin"
+            secretkey=process.env.adminToken;
         }else{
-            secretkey="user"
+            secretkey=process.env.userToken;
         }
         const token = jwt.sign({ message: phoneNumber }, secretkey, { expiresIn: '1h' });
         console.log("Token issued:", token);
@@ -51,5 +53,18 @@ const userauthentication = async (req, role) => {
 };
 
 
+const checkapikey=async(keyy)=>{
+    
+    const apikey=keyy;
+    console.log("wasd ",apikey," ",process.env.apikey);
+    
+    if(apikey==process.env.apikey){
+        return 1;
+    }
+    return 0;
+}
 
-module.exports={tokenGeneration,userauthentication}
+
+
+
+module.exports={tokenGeneration,userauthentication,checkapikey}

@@ -1,5 +1,7 @@
 const Sequelize =require("sequelize")
 const cors=require("cors")
+const dotenv=require('dotenv');
+dotenv.config()
 // const sequelize = new Sequelize(process.env.uri);
 const sequelize = new Sequelize('RailwayManagement', 'postgres', '1234', {
     dialect: 'postgres',
@@ -27,7 +29,7 @@ app.use("/ad",(req,res)=>{
     res.send("www")
 })
 app.use(cors())
-app.listen(3000,()=>{
+app.listen(process.env.PORT,()=>{
     console.log("Server listening on port 3000");
     
 })
